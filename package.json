@@ -1,10 +1,16 @@
 {
   "name": "linux-lock-pi",
+  "version": "0.0.2",
   "description": "Application for controlling LinuxLock access control system",
   "author": "Kaleidus Code",
-  "version": "0.0.2",
+  "contributors": [ 
+    {
+      "name": "Caitlin Potter",
+      "email": "snowball@defpixel.com"
+    } 
+  ],
   "bin": {
-    "jshint": "./bin/linux-lock-service"
+    "linux-lock-service": "./bin/linux-lock-service"
   },
   "files": [
     "bin"
