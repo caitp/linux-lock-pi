@@ -3,6 +3,15 @@
   "description": "Application for controlling LinuxLock access control system",
   "author": "Kaleidus Code",
   "version": "0.0.2",
+  "bin": {
+    "jshint": "./bin/linux-lock-service"
+  },
+  "files": [
+    "bin"
+  ],
+  "scripts": {
+    "start": "./bin/linux-lock-service"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:caitp/linux-lock-pi.git"

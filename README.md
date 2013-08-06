@@ -25,7 +25,7 @@ To install, download the package with `sudo npm install -g linux-lock-pi`, on a 
 
 ##Setup
 
-Currently, the script communicates with a hardcoded webserver, and so it is necessary to find the line in index.js where `restify.createJsonClient()` is called, and change the 'url' to the installation of your own LinuxLock web server.
+Currently, the script communicates with a hardcoded webserver, and so it is necessary to find the line in `bin/linux-lock-service` where `restify.createJsonClient()` is called, and change the 'url' to the installation of your own LinuxLock web server.
 
 ---
 

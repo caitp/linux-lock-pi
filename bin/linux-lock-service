@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var restify = require('restify')
 var readline = require('readline')
 
