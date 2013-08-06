@@ -3,6 +3,18 @@
   "description": "Application for controlling LinuxLock access control system",
   "author": "Kaleidus Code",
   "version": "0.0.2",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:caitp/linux-lock-pi.git"
+  },
+  "keywords": [
+    "LinuxLock",
+    "RaspberryPi"
+  ],
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/caitp/linux-lock-pi/issues"
+  },
   "dependencies": {
     "restify": "2.6.0",
     "serialport": "1.1.1"
