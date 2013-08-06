@@ -1,0 +1,16 @@
+{
+  "name": "linux-lock-pi",
+  "description": "Application for controlling LinuxLock access control system",
+  "author": "Kaleidus Code",
+  "version": "0.0.2",
+  "dependencies": {
+    "restify": "2.6.0",
+    "serialport": "1.1.1"
+  },
+  "devDependencies": {
+    "vows": "0.5.x",
+	  "mocha": "*",
+	  "should": "*"
+  },
+  "engine": "node >= 0.6.6"
+}
