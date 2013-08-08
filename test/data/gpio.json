@@ -1,0 +1,14 @@
+{
+  "authorized": {
+    "pin": 4,
+    "action": {
+      "set": 1000
+    }
+  },
+  "unauthorized": {
+    "pin": 6,
+    "action": {
+      "set": 1000
+    }
+  }
+}

@@ -3,11 +3,11 @@
   "version": "0.0.3",
   "description": "Application for controlling LinuxLock access control system",
   "author": "Kaleidus Code",
-  "contributors": [ 
+  "contributors": [
     {
       "name": "Caitlin Potter",
       "email": "snowball@defpixel.com"
-    } 
+    }
   ],
   "bin": {
     "linux-lock-service": "./bin/linux-lock-service"
@@ -16,7 +16,8 @@
     "bin"
   ],
   "scripts": {
-    "start": "./bin/linux-lock-service"
+    "start": "./bin/linux-lock-service",
+    "test": "vows --spec --isolate"
   },
   "repository": {
     "type": "git",
@@ -32,12 +33,14 @@
   },
   "dependencies": {
     "restify": "2.6.0",
-    "serialport": "1.1.1"
+    "serialport": "1.1.1",
+    "gpio": "~0.2.4",
+    "jsonrepair": "~0.1.0",
+    "q": "~0.9.6"
   },
   "devDependencies": {
-    "vows": "0.5.x",
-	  "mocha": "*",
-	  "should": "*"
+    "vows": "~0.7.0",
+    "should": "*"
   },
   "engine": "node >= 0.6.6"
 }
