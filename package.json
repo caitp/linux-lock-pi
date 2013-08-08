@@ -36,7 +36,8 @@
     "serialport": "1.1.1",
     "gpio": "~0.2.4",
     "node-promise": "~0.5.8",
-    "jsonfile": "~1.0.0"
+    "jsonfile": "~1.0.0",
+    "async": "~0.2.9"
   },
   "devDependencies": {
     "vows": "~0.7.0",
