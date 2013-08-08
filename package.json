@@ -34,10 +34,10 @@
   "dependencies": {
     "restify": "2.6.0",
     "serialport": "1.1.1",
-    "gpio": "~0.2.4",
     "node-promise": "~0.5.8",
     "jsonfile": "~1.0.0",
-    "async": "~0.2.9"
+    "async": "~0.2.9",
+    "rpi-gpio": "0.0.4"
   },
   "devDependencies": {
     "vows": "~0.7.0",
