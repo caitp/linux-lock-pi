@@ -12,7 +12,7 @@ var LinuxLockService = function(config) {
     // file.
     //
     this.gpio = new LinuxLock.GPIO()
-    this.client = new LinuxLock.Client(this.config.client)
+    this.client = LinuxLock.createClient(this.config.client)
     this.client.on('authorized', function(details) {
       console.log(details.tag + ": authorized")
       if(this.config.gpio.authorized)
