@@ -35,8 +35,8 @@
     "restify": "2.6.0",
     "serialport": "1.1.1",
     "gpio": "~0.2.4",
-    "jsonrepair": "~0.1.0",
-    "node-promise": "~0.5.8"
+    "node-promise": "~0.5.8",
+    "jsonfile": "~1.0.0"
   },
   "devDependencies": {
     "vows": "~0.7.0",
