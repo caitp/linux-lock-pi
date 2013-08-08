@@ -35,8 +35,7 @@
     "restify": "2.6.0",
     "serialport": "1.1.1",
     "gpio": "~0.2.4",
-    "jsonrepair": "~0.1.0",
-    "q": "~0.9.6"
+    "jsonrepair": "~0.1.0"
   },
   "devDependencies": {
     "vows": "~0.7.0",
