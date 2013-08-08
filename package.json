@@ -1,6 +1,6 @@
 {
   "name": "linux-lock-pi",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Application for controlling LinuxLock access control system",
   "author": "Kaleidus Code",
   "contributors": [

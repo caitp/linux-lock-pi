@@ -43,12 +43,13 @@ This module allows for some configuration of GPIO actions to be taken. The defau
 configurations, "authorized" and "unauthorized", however there is no real way to limit what you do with
 the library manually.
 
-The code uses the WiringPi pin numbering scheme, and non-GPIO pins will not be used by the GPIO module.
+The code uses the GPIO P1 header notation. I've included WiringPi and BCM names for convenience and additional information.
+As you can easily see, WiringPi's GPIO #0 is actually Pin **#11**, and would be denoted as such.
 
-Just for convenience, the WiringPi wiring scheme is noted below. The important pins are `&lt;strong&gt;`, for emphasis. Again, other pins will be ignored by the scripts unless I can think of some good reason not to (and there probably is such a reason).
+Currently, it is not possible to ask for a pin "reading", as these are output-only at the moment. In the future, if necessary, an input option will be added.
 
 <table>
-<th>wiringPi</th><th>Name</th><th>Header</th><th>Name</th><th>wiringPi</th>
+<th>WiringPi</th><th>Name</th><th>Header</th><th>Name</th><th>WiringPi</th>
 <tr><td>–</td><td>3.3v</td><th>01 | 02</th><td>5v</td><td>–</td></tr>
 <tr><td>8</td><td>SDA0</td><th>03 | 04</th><td>5v</td><td>–</td></tr>
 <tr><td>9</td><td>SCL0</td><th>05 | 06</th><td>0v</td><td>–</td></tr>
@@ -70,7 +71,7 @@ Configuring a GPIO action from JSON would look something like this:
 {
   "gpio": {
     "authorized": {
-      "pin": 4,
+      "pin": 11,
       "action": {
         "set": 5000,
       }
@@ -79,7 +80,7 @@ Configuring a GPIO action from JSON would look something like this:
 }
 ```
 
-The above JSON, on notice of authorization, sets pin 4 to 'high' for 5 seconds (5000 milliseconds). **NOTE** The timing is NOT perfect, do not use this to choreograph dance videos. It will not work out.
+The above JSON, on notice of authorization, sets pin 11 (GPIO 0) to 'high' for 5 seconds (5000 milliseconds). **NOTE** The timing is NOT perfect, do not use this to choreograph dance videos. It will not work out.
 
 The "authorized" and "unauthorized" keys can take Objects as well as Arrays. If they are given arrays, then each element of the array is executed asynchronously, and should not expect any synchronization.
 
@@ -90,10 +91,3 @@ In future revisions, it is likely that synchronous and asynchronous nature of GP
 ---
 
 Congratulations, your lock service is now communicating with the LinuxLock server, and can be notified when a user is authorized to enter a door via an RFID swipe, and it takes only milliseconds. Wonderful!
-
-##Caveats
-
-There is some very basic GPIO configuration currently, however the main script will not make use of them, as
-of yet. This shall be addressed shortly, with the addition of documentation in README.md regarding the
-construction of configuration files. (For now, I've made an effort to document the source code nicely, so
-please refer to lib/*.js for details).
