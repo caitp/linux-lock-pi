@@ -11,7 +11,10 @@ var LinuxLockService = function(config) {
     // Load and normalize JSON configuration file.
     //
     LinuxLock.loadConfig(config, function(err, config) {
-      if(err) throw(err)
+      if(err) {
+        deferred.reject(err)
+        return deffered.promise
+      }
       this.config = config
 
       //
