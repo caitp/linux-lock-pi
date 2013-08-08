@@ -13,7 +13,7 @@ var LinuxLockService = function(config) {
     LinuxLock.loadConfig(config, function(err, config) {
       if(err) {
         deferred.reject(err)
-        return deffered.promise
+        return deferred.promise
       }
       this.config = config
 
