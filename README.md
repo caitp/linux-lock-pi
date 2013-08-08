@@ -41,4 +41,7 @@ Congratulations, your lock service is now communicating with the LinuxLock serve
 
 ##Caveats
 
-Of course, the code to actually enable a door to be opened is omitted from this document, and is left as an exercise to the user, until further notice. This is due largely to the fact that MagLock units differ in electronic input requirements, and it is difficult to design a standard which "works for everyone" and is simple to configure.
+There is some very basic GPIO configuration currently, however the main script will not make use of them, as
+of yet. This shall be addressed shortly, with the addition of documentation in README.md regarding the
+construction of configuration files. (For now, I've made an effort to document the source code nicely, so
+please refer to lib/*.js for details).
