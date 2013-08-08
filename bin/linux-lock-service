@@ -1,38 +1,48 @@
 #!/usr/bin/env node
 var LinuxLockService = function(config) {
   var LinuxLock = require('../lib'),
-      self = this
+      q = require('node-promise'),
+      self = this,
+      defer = q.defer,
+      deferred = defer()
+
   try {
     //
     // Load and normalize JSON configuration file.
     //
-    this.config = LinuxLock.loadConfig(config)
-    //
-    // Construct service dependencies using instructions from the configuration
-    // file.
-    //
-    this.gpio = new LinuxLock.GPIO()
-    this.client = LinuxLock.createClient(this.config.client)
-    this.client.on('authorized', function(details) {
-      console.log(details.tag + ": authorized")
-      if(this.config.gpio.authorized)
-        this.gpio.execute(this.config.gpio.authorized)
-    })
-    this.client.on('unauthorized', function(details) {
-      console.log(details.tag + ": unauthorized")
-      if(this.config.gpio.unauthorized)
-        this.gpio.execute(this.config.gpio.unauthorized)
-    })
-    this.rfidReader = new LinuxLock.RFIDReader(this.config.rfidReader, false)
-    this.rfidReader.on('scanned', function(value) {
-      self.client.checkRFID(value)
+    LinuxLock.loadConfig(config, function(err, config) {
+      if(err) throw(err)
+      this.config = config
+
+      //
+      // Construct service dependencies using instructions from the configuration
+      // file.
+      //
+      this.gpio = new LinuxLock.GPIO()
+      this.client = LinuxLock.createClient(this.config.client)
+      this.client.on('authorized', function(details) {
+        console.log(details.tag + ": authorized")
+        if(this.config.gpio.authorized)
+          this.gpio.execute(this.config.gpio.authorized)
+      })
+      this.client.on('unauthorized', function(details) {
+        console.log(details.tag + ": unauthorized")
+        if(this.config.gpio.unauthorized)
+          this.gpio.execute(this.config.gpio.unauthorized)
+      })
+      this.rfidReader = new LinuxLock.RFIDReader(this.config.rfidReader, false)
+      this.rfidReader.on('scanned', function(value) {
+        self.client.checkRFID(value)
+      })
+      deferred.resolve(this)
     })
   } catch(err) {
     //
     // If some error occurs, throw back to the caller.
     //
-    throw err
+    deferred.reject(err)
   }
+  return deferred.promise
 }
 
 module.exports = exports = LinuxLockService
@@ -41,6 +51,9 @@ module.exports = exports = LinuxLockService
 // Startup the application if we're the main script
 //
 if(!module.parent) {
-  var service = new LinuxLockService('~/.linux-lock-service.json')
-  service.rfidReader.enable()
+  var config = process.argv[2]
+  new LinuxLockService(config || '~/.linux-lock-service.json')
+  .then(function(service) {
+    service.rfidReader.enable()
+  })
 }
