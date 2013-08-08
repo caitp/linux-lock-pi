@@ -17,24 +17,27 @@ var LinuxLockService = function(config) {
       // Construct service dependencies using instructions from the configuration
       // file.
       //
-      this.gpio = new LinuxLock.GPIO()
-      this.client = LinuxLock.createClient(this.config.client)
-      this.rfidReader = new LinuxLock.RFIDReader(this.config.rfidReader, false)
-      var self = this
-      this.client.on('authorized', function(details) {
-        console.log(details.tag + ": authorized")
-        if(self.config.gpio.authorized)
-          self.gpio.execute(self.config.gpio.authorized)
+      new LinuxLock.GPIO()
+      .then(function(gpio) {
+        this.gpio = gpio
+        this.client = LinuxLock.createClient(this.config.client)
+        this.rfidReader = new LinuxLock.RFIDReader(this.config.rfidReader, false)
+        var self = this
+        this.client.on('authorized', function(details) {
+          console.log(details.tag + ": authorized")
+          if(self.config.gpio.authorized)
+            self.gpio.execute(self.config.gpio.authorized)
+        })
+        this.client.on('unauthorized', function(details) {
+          console.log(details.tag + ": unauthorized")
+          if(self.config.gpio.unauthorized)
+            self.gpio.execute(self.config.gpio.unauthorized)
+        })
+        this.rfidReader.on('scanned', function(value) {
+          self.client.checkRFID(value)
+        })
+        deferred.resolve(this)
       })
-      this.client.on('unauthorized', function(details) {
-        console.log(details.tag + ": unauthorized")
-        if(self.config.gpio.unauthorized)
-          self.gpio.execute(self.config.gpio.unauthorized)
-      })
-      this.rfidReader.on('scanned', function(value) {
-        self.client.checkRFID(value)
-      })
-      deferred.resolve(this)
     })
   } catch(err) {
     //
