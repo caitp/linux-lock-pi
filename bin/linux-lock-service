@@ -2,7 +2,6 @@
 var LinuxLockService = function(config) {
   var LinuxLock = require('../lib'),
       q = require('node-promise'),
-      self = this,
       defer = q.defer,
       deferred = defer()
 
@@ -20,17 +19,18 @@ var LinuxLockService = function(config) {
       //
       this.gpio = new LinuxLock.GPIO()
       this.client = LinuxLock.createClient(this.config.client)
+      this.rfidReader = new LinuxLock.RFIDReader(this.config.rfidReader, false)
+      var self = this
       this.client.on('authorized', function(details) {
         console.log(details.tag + ": authorized")
-        if(this.config.gpio.authorized)
-          this.gpio.execute(this.config.gpio.authorized)
+        if(self.config.gpio.authorized)
+          self.gpio.execute(self.config.gpio.authorized)
       })
       this.client.on('unauthorized', function(details) {
         console.log(details.tag + ": unauthorized")
-        if(this.config.gpio.unauthorized)
-          this.gpio.execute(this.config.gpio.unauthorized)
+        if(self.config.gpio.unauthorized)
+          self.gpio.execute(self.config.gpio.unauthorized)
       })
-      this.rfidReader = new LinuxLock.RFIDReader(this.config.rfidReader, false)
       this.rfidReader.on('scanned', function(value) {
         self.client.checkRFID(value)
       })
