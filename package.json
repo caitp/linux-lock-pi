@@ -16,6 +16,7 @@
     "bin",
     "lib"
   ],
+  "main": "./lib",
   "scripts": {
     "start": "./bin/linux-lock-service",
     "test": "vows --spec --isolate"
