@@ -17,8 +17,7 @@ var LinuxLockService = function(config) {
       // Construct service dependencies using instructions from the configuration
       // file.
       //
-      this.gpio = new LinuxLock.GPIO()
-      this.gpio = gpio
+      this.gpio = LinuxLock.GPIO 
       this.client = LinuxLock.createClient(this.config.client)
       this.rfidReader = new LinuxLock.RFIDReader(this.config.rfidReader, false)
       var self = this
