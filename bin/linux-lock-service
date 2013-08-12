@@ -52,7 +52,8 @@ module.exports = exports = LinuxLockService
 //
 if(!module.parent) {
   var config = process.argv[2]
-  new LinuxLockService(config || '~/.linux-lock-service.json')
+  var defaultPath = process.env.HOME + '/.linux-lock-service.json'
+  new LinuxLockService(config || defaultPath)
   .then(function(service) {
     service.rfidReader.enable()
   })
